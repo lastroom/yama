@@ -1,0 +1,4 @@
+lastdashboard
+=============
+
+Awesome node dashboard
