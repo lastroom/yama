@@ -24,8 +24,9 @@
                     {{ header }}:
                 </label>
                 <div class="controls">
+                    {{ mapData(doc, f, '.') }}
                     {% if type == "select" %}
-                        <select name="{{ f }}" id="{{ f }}" {% if multiple %}multiple{% endif %}>
+                        <select name="{{ mapName(f, '.') }}" id="{{ mapName(f, '.') }}" {% if multiple %}multiple{% endif %}>
                             {% set values = fields[f]['values'] %}
                             {% for v in values %}
                                 {% set sel = doc[f] %}
@@ -36,12 +37,16 @@
                                 {% endif %}
                             {% endfor %}
                         </select>
+                    {% elseif type == "csv" %}
+                        <ul class="tagit" data-field-name="{{ mapName(f, '.') }}" id="{{ mapName(f, '.') }}" data-placeholder-text="{{ fields[f].placeholder|default("") }}" data-pattern="{{ fields[f].pattern|default("") }}">
+                            {% for v in doc[f] %} <li>{{ v }}</li> {% endfor %} <li></li>
+                        </ul>
                     {% else %}
                         {% if type == "checkbox" %}
-                            <input type="hidden" name="{{ f }}" value="{% if doc[f] %}true{% else %}false{% endif %}">
-                            <input type="{{ type }}" id="{{ f }}" class="form-control" placeholder="Type {{ header }}" autocomplete="off" value="{{ doc[f] || "" }}" {% if doc[f] %}checked{% endif %}>
+                            <input type="hidden" name="{{ mapName(f, '.') }}" value="{% if doc[f] %}true{% else %}false{% endif %}">
+                            <input type="{{ type }}" id="{{ mapName(f, '.') }}" class="form-control" placeholder="Type {{ header }}" autocomplete="off" value="{{ doc[f] || "" }}" {% if doc[f] %}checked{% endif %}>
                         {% else %}
-                            <input type="{{ type }}" id="{{ f }}" class="form-control" name="{{ f }}" placeholder="Type {{ header }}" autocomplete="off" value="{{ doc[f] || "" }}">
+                            <input type="{{ type }}" id="{{ mapName(f, '.') }}" class="form-control" name="{{ mapName(f, '.') }}" placeholder="Type {{ header }}" autocomplete="off" value="{{ doc[f] || "" }}">
                         {% endif %}
                     {% endif %}
                 </div>

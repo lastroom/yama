@@ -176,6 +176,12 @@ dashboard.add({
         'active': {
             header: 'Active',
             widget: 'checkbox'
+        },
+        emails: {
+            header: 'Emails',
+            widget: 'csv',
+            placeholder: 'Type an email...',
+            pattern: '^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$'
         }
     },
     order: { //The attributes to order the results.

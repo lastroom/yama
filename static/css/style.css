@@ -2,6 +2,7 @@
     font-family: helvetica, arial;
     font-size: 1em;
     color: #555;
+    background: #fbfbfd;
 }
 
 h1 {
@@ -25,9 +26,127 @@ h5 {
 }
 
 body {
-    background: #fcfcfc;
+    background: #fbfbfd;
 }
 
 #main {
   margin-top: 60px!important;
+}
+
+
+.tagit {
+    margin-left: 0!important;
+}
+
+.tagit .tagit-choice {
+    position: relative;
+    background: #fbfbfb;
+}
+
+.tagit .tagit-new {
+  background: white;
+}
+
+.tagit .tagit-label, .tagit .tagit-close, .tagit .ui-icon-close {
+    background: #fbfbfb;
+}
+
+.tagit .text-icon {
+    color: gray!important;
+    position: absolute!important;
+    right: 2px!important;
+    top: -2px!important;
+    display: block!important;
+    width: 10px!important;
+    height: 10px!important;
+}
+
+.btn {
+    border-radius: 0;
+    border: 1px #ea2470 solid;
+    background: none;
+    color: #ea2470;
+    text-shadow: none;
+}
+
+
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn.disabled,
+.btn[disabled] {
+    background: #ea2470;
+    color: #fbfbfd;
+}
+
+.btn-primary {
+    background: none;
+}
+
+.btn-danger {
+    border: 1px #555964 solid;
+    color: #555964;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active,
+.btn-danger.disabled,
+.btn-danger[disabled] {
+    background: #555964;
+    color: #fbfbfd;
+}
+
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+    background: #ea2470;
+    color: #fbfbfd;
+}
+
+a {
+    color: #555964;
+}
+
+.nav-header {
+    color: #555964;
+}
+
+.nav-list >.active > a, .nav-list > .active > a:hover, .nav-list > .active > a:focus {
+    background-color: #ea2470;
+}
+
+
+
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+  background-color: #fbfbfd;
+}
+
+.well {
+    background-color: #fbfbfd;
+    -webkit-border-radius: 0!important;
+     -moz-border-radius: 0!important;
+          border-radius: 0!important;
+  -webkit-box-shadow: inset none!important;
+     -moz-box-shadow: inset none!important;
+          box-shadow: inset none!important;
+}
+
+.well-large {
+  -webkit-border-radius: 0!important;
+     -moz-border-radius: 0!important;
+          border-radius: 0!important;
+}
+
+.well-small {
+  -webkit-border-radius: 0!important;
+     -moz-border-radius: 0!important;
+          border-radius: 0!important;
 }
