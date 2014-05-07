@@ -65,9 +65,34 @@ $ npm run-script dashboard
 
 ## How to initialize
 
+> First create a file named config.js on the project root folder with this content:
+
+```javascript
+module.exports = require('./config/' + (process.env.NODE_ENV || 'development') + '.js');
+```
+
+> Then create a folder called config and write inside this new folder two files **development.json** and **production.json**.
+
+> Fill both files with this content
+
+```json
+module.exports = {
+    mongo: {
+        "host": "myhost",
+        "db": "mydb"
+    }
+}
+```
+
+Other arguments are user, password and port, but for this example we don't need them.
+
 > On your project main file add the next lines
 
 ```javascript
+var app = express();
+
+...
+
 var dashboard = require('lastdashboard');
 
 dashboard.models.paths = [
@@ -91,6 +116,10 @@ dashboard.media = __dirname + '/static';
 
 // Run dashboard with base url as param
 dashboard.run('/dashboard');
+
+...
+
+app.listen(9999);
 ```
 
 ## Add models to dashboard
