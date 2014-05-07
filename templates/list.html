@@ -1,0 +1,77 @@
+{% extends "layouts/default.html" %}
+
+{% block content %}
+<div id="list">
+    <div id="list-top">
+        <h2>{{ title }}</h2>
+        <div id="new">
+          <a href="{{ base }}/{{ path }}/new" class="btn btn-primary" role="button">+ New</a>
+        </div>
+      </div>
+      <hr>
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
+          <tr>
+            <th></th>
+            {% for f in list %}
+            <th>{{ fields[f]["header"] }}</th>
+            {% endfor %}
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in data %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              {% for f in list %}
+              <td>
+                {% set type = fields[f]['widget'] %}
+                {% set link = fields[f]['link'] %}
+                {% set multiple = fields[f]['multiple'] %}
+                {% if type == "select" %}
+                    {% for v in d[f] %}
+                        {% if link %}
+                            <a href="{{ base }}/{{ path }}/{{ v.id }}">{{ v[fields[f].display] }}</a>{% if loop.last %}{% else %}, {% endif %}
+                        {% else %}
+                            {{ v[fields[f].display] }}{% if loop.last %}{% else %}, {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% if link %}
+                        <a href="{{ base }}/{{ path }}/{{ d.id }}">{{ d[f] }}</a>
+                    {% else %}
+                        {{ d[f] }}
+                    {% endif %}
+                {% endif %}
+              </td>
+              {% endfor %}
+              <td>
+                    <a href="{{ base }}/{{ path }}/{{ d.id }}/edit" class="btn btn-edit">Edit</a>
+                    <a href="{{ base }}/{{ path }}/{{ d.id }}/delete" class="btn btn-danger" onclick="preventDelete">Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <table width="50%" style="border-bottom: 0;">
+        <tr>
+            {% if page > 1 %}
+            <td width="25%"><a href="{{ base }}/{{ path }}?page=1">First</a></td>
+            <td width="25%"><a href="{{ base }}/{{ path }}?page={{ decrease(page) }}"> &lt;&lt; Previous</a></td>
+            {% else %}
+            <td width="25%"><span>First</span></td>
+            <td width="25%"><span> &lt;&lt; Previous</span></td>
+            {% endif %}
+            {% if page < pages %}
+            <td width="25%"><a href="{{ base }}/{{ path }}?page={{ increase(page) }}">Next &gt;&gt;</a></td>
+            <td width="25%"><a href="{{ base }}/{{ path }}?page={{ pages }}">Last</a></td>
+            {% else %}
+            <td width="25%"><span>Next &gt;&gt;</span></td>
+            <td width="25%"><span>Last</span></td>
+            {% endif %}
+        </tr>
+    </table>
+</div>
+{% endblock %}

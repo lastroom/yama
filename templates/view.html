@@ -1,0 +1,25 @@
+{% extends "layouts/default.html" %}
+
+{% block content %}
+    <h2>Information</h2>
+    <hr>
+    <table class="table table-bordered">
+        {% for f in edit %}
+        <tr>
+            <th>{{ fields[f].header }}</th>
+            {% if fields[f].widget == "select" %}
+            <td>
+                {% for v in fields[f].values %}
+                    {{ v.display }}{% if loop.last %}{% else %}, {% endif %}
+                {% endfor %}
+            </td>
+            {% else %}
+            <td>{{ doc[f] || "" }}</td>
+            {% endif %}
+        <tr>
+        {% endfor %}
+    </table>
+    <div class="form-actions">
+        <button class="btn" type="button" onclick="history.back();">Atras</button>
+    </div>
+{% endblock %}

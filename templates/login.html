@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+    <head></head>
+    <body>
+        {% include "includes/head.html" %}
+        <div class="container">
+            <form action="{{ request.route.path }}" method="post" class="form-signin">
+                <h2 class="form-signin-heading">Welcome!</h2>
+                <p>
+                    {% if error %}
+                        {{ error }}
+                    {% endif %}
+                </p>
+                <p>
+                    <input type="text" class="input-block-level" placeholder="Email" name="email" autocomplete="off">
+                </p>
+                <p>
+                    <input type="password" class="input-block-level" placeholder="Password" name="password" autocomplete="off">
+                </p>
+                <p>
+                    <button type="submit" class="input-block-level btn btn-primary btn-large">Sign in</button>
+                </p>
+            </form>
+        </div>
+        {% include "includes/end.html" %}
+    </body>
+</html>

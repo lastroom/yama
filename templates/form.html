@@ -1,0 +1,57 @@
+{% extends "layouts/default.html" %}
+
+{% block content %}
+
+{% if doc.isNew %}
+    {% set action = base + "/" + path %}
+    {% set id = "" %}
+{% else %}
+    {% set action = base + "/" + path + "/" + doc._id %}
+    {% set id = doc._id %}
+{% endif %}
+
+<h2>{% if id %}Edit {{ meta.model }}{% else %}New {{ meta.model }}{% endif %}</h2>
+<hr>
+<div id="form">
+    <form action="{{ action }}" class="form-horizontal" method="post" enctype="multipart/form-data" role="form" autocomplete="off">
+        {% for f in edit %}
+            <div class="control-group">
+                {% set type = fields[f]['widget'] || "text" %}
+                {% set header = fields[f]['header'] %}
+                {% set name = fields[f]['name'] || f %}
+                {% set multiple = fields[f]['multiple'] %}
+                <label for="{{ f }}" class="control-label">
+                    {{ header }}:
+                </label>
+                <div class="controls">
+                    {% if type == "select" %}
+                        <select name="{{ f }}" id="{{ f }}" {% if multiple %}multiple{% endif %}>
+                            {% set values = fields[f]['values'] %}
+                            {% for v in values %}
+                                {% set sel = doc[f] %}
+                                {% if fields[f]['ref'] %}
+                                <option value="{{ v.value }}" {% if exists(v.value, sel) %}selected{% endif %}>{{ v.display }}</option>
+                                {% else %}
+                                <option value="{{ v.value }}" {% if v == sel %}selected{% endif %}>{{ v.display }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        {% if type == "checkbox" %}
+                            <input type="hidden" name="{{ f }}" value="{% if doc[f] %}true{% else %}false{% endif %}">
+                            <input type="{{ type }}" id="{{ f }}" class="form-control" placeholder="Type {{ header }}" autocomplete="off" value="{{ doc[f] || "" }}" {% if doc[f] %}checked{% endif %}>
+                        {% else %}
+                            <input type="{{ type }}" id="{{ f }}" class="form-control" name="{{ f }}" placeholder="Type {{ header }}" autocomplete="off" value="{{ doc[f] || "" }}">
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="form-actions">
+            <button class="btn" type="button" onclick="history.back();">Atras</button>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </div>
+    </form>
+</div>
+    
+{% endblock %}

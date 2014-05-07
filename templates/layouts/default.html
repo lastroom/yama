@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+{% include "../includes/head.html" %}
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="{{ base }}">Dashboard</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="{{ base }}">Home</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Action
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for item in menu %}
+                                <li {% if item == path %}active{% endif %}>
+                                    <a href="{{ base }}/{{ item }}" role="menuitem" tabindex="-1">
+                                        {{ capitalizeFirstLetter(item) }}
+                                    </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="{{ base }}/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="main" class="row">
+            <div class="span2 sidebar-nav">
+                <ul class="nav nav-list well">
+                    <li class="nav-header">Models</li>
+                {% for item in menu %}
+                    <li class="list-group-item {% if item == path %}active{% endif %}">
+                        <a href="{{ base }}/{{ item }}">
+                            {{ capitalizeFirstLetter(item) }}
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="span10">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    {% include "../includes/end.html" %}
+</body>
+</html>

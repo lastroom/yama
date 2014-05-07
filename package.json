@@ -1,0 +1,23 @@
+{
+    "name": "lastdashboard",
+    "version": "0.0.1",
+    "_id": "lastdashboard@0.0.1",
+    "dependencies": {
+        "underscore": "latest",
+        "mongoose": "latest",
+        "express": "latest",
+        "swig": "latest",
+        "async": "latest",
+        "execSync": "latest"
+    },
+    "main": "./index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lastroom/lastdashboard"
+    },
+    "engines": {
+        "node": ">=0.10.15"
+    },
+    "optionalDependencies": {},
+    "scripts": {}
+}
