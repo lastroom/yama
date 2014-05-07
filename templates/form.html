@@ -32,7 +32,7 @@
                                 {% if fields[f]['ref'] %}
                                 <option value="{{ v.value }}" {% if exists(v.value, sel) %}selected{% endif %}>{{ v.display }}</option>
                                 {% else %}
-                                <option value="{{ v.value }}" {% if v == sel %}selected{% endif %}>{{ v.display }}</option>
+                                <option value="{{ v }}" {% if v == sel %}selected{% endif %}>{{ v }}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
