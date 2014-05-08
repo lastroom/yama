@@ -6,16 +6,28 @@
     <table class="table table-bordered">
         {% for f in edit %}
         <tr>
+            {{ mapData(doc, f, '.') }}
             <th>{{ fields[f].header }}</th>
-            {% if fields[f].widget == "select" %}
             <td>
-                {% for v in fields[f].values %}
-                    {{ v.display }}{% if loop.last %}{% else %}, {% endif %}
-                {% endfor %}
-            </td>
+            {% if fields[f].widget == "select" %}
+                {% if isType(doc[f], "string") %}
+                      {{ doc[f] }}
+                    {% elseif isType(doc[f], "object") %}
+                      {{ mapData(doc[f], fields[f]['display'], '.') }}
+                      {{ doc[f][fields[f]['display']] }}
+                    {% else %}
+                      {% for v in doc[f] %}
+                        {% if fields[f].ref %}
+                            {{ v[fields[f].display] }}{% if loop.last %}{% else %}, {% endif %}
+                        {% else %}
+                          {{ v }}{% if loop.last %}{% else %}, {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
             {% else %}
-            <td>{{ doc[f] || "" }}</td>
+                {{ doc[f] || "" }}
             {% endif %}
+            </td>
         <tr>
         {% endfor %}
     </table>

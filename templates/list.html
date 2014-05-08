@@ -30,13 +30,32 @@
                 {% set link = fields[f]['link'] %}
                 {% set multiple = fields[f]['multiple'] %}
                 {% if type == "select" %}
-                    {% for v in d[f] %}
-                        {% if link %}
-                            <a href="{{ base }}/{{ path }}/{{ v.id }}">{{ v[fields[f].display] }}</a>{% if loop.last %}{% else %}, {% endif %}
+                    {% if isType(d[f], "string") %}
+                      {% if link %}
+                        <a href="{{ base }}/{{ path }}/{{ d.id }}">{{ d[f] }}</a>
+                      {% else %}
+                        {{ d[f] }}
+                      {% endif %}
+                    {% elseif isType(d[f], "object") %}
+                      {{ mapData(d[f], fields[f]['display'], '.') }}
+                      {% if link %}
+                        <a href="{{ base }}/{{ fields[f].route|default(path) }}/{{ d[f].id }}">{{ d[f][fields[f]['display']] }}</a>
+                      {% else %}
+                        {{ d[f][fields[f]['display']] }}
+                      {% endif %}
+                    {% else %}
+                      {% for v in d[f] %}
+                        {% if fields[f].ref %}
+                          {% if link %}
+                              <a href="{{ base }}/{{ path }}/{{ v.id }}">{{ v[fields[f].display] }}</a>{% if loop.last %}{% else %}, {% endif %}
+                          {% else %}
+                              {{ v[fields[f].display] }}{% if loop.last %}{% else %}, {% endif %}
+                          {% endif %}
                         {% else %}
-                            {{ v[fields[f].display] }}{% if loop.last %}{% else %}, {% endif %}
+                          {{ v }}{% if loop.last %}{% else %}, {% endif %}
                         {% endif %}
-                    {% endfor %}
+                      {% endfor %}
+                    {% endif %}
                 {% else %}
                     {% if link %}
                         <a href="{{ base }}/{{ path }}/{{ d.id }}">{{ d[f] }}</a>
