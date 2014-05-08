@@ -25,6 +25,7 @@
               <td>{{ loop.index }}</td>
               {% for f in list %}
               <td>
+                {{ mapData(d, f, '.') }}
                 {% set type = fields[f]['widget'] %}
                 {% set link = fields[f]['link'] %}
                 {% set multiple = fields[f]['multiple'] %}
