@@ -181,7 +181,9 @@ dashboard.add({
             header: 'Emails',
             widget: 'csv',
             placeholder: 'Type an email...',
-            pattern: '^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$'
+            pattern: '^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$',
+            link: true,
+            route: 'emails'
         }
     },
     order: { //The attributes to order the results.
