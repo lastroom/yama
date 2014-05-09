@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Lastdashboard by lastroom</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Lastdashboard</h1>
+        <p>Awesome node-express dashboard</p>
+
+        <p class="view"><a href="https://github.com/lastroom/lastdashboard">View the Project on GitHub <small>lastroom/lastdashboard</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/lastroom/lastdashboard/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/lastroom/lastdashboard/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/lastroom/lastdashboard">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a name="technologies" class="anchor" href="#technologies"><span class="octicon octicon-link"></span></a>Technologies</h2>
+
+<table>
+<thead><tr>
+<th align="center">Server</th>
+<th align="center">Client</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="center">express</td>
+<td align="center">Bootstrap</td>
+</tr>
+<tr>
+<td align="center">mongoose</td>
+<td align="center">jQuery</td>
+</tr>
+<tr>
+<td align="center">swig</td>
+<td align="center">html5shiv</td>
+</tr>
+<tr>
+<td align="center">underscore</td>
+<td align="center">responseJS</td>
+</tr>
+<tr>
+<td align="center">async</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">execSync</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table><h2>
+<a name="how-to-install" class="anchor" href="#how-to-install"><span class="octicon octicon-link"></span></a>How to install</h2>
+
+<blockquote>
+<p>On your project directory install the node module as follows:</p>
+</blockquote>
+
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>npm install lastdashboard
+</pre></div>
+
+<h2>
+<a name="how-to-create-the-first-admin" class="anchor" href="#how-to-create-the-first-admin"><span class="octicon octicon-link"></span></a>How to create the first admin</h2>
+
+<blockquote>
+<p>for create the first admin, just create a file <strong>dashboardinit.js</strong> with the content below</p>
+</blockquote>
+
+<div class="highlight highlight-javascript"><pre><span class="err">#</span><span class="o">!</span><span class="err">/usr/bin/env node</span>
+
+<span class="kd">var</span> <span class="nx">dashboard</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'lastdashboard'</span><span class="p">);</span>
+
+<span class="nx">dashboard</span><span class="p">.</span><span class="nx">initializeDB</span><span class="p">({</span>
+        <span class="nx">host</span><span class="o">:</span> <span class="s2">"myhost"</span><span class="p">,</span>
+        <span class="nx">db</span><span class="o">:</span><span class="s2">"mydatabase"</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="nx">email</span><span class="o">:</span> <span class="s2">"admin@mycompany.com"</span><span class="p">,</span>
+        <span class="nx">password</span><span class="o">:</span> <span class="s2">"passphrase"</span>
+    <span class="p">});</span>
+</pre></div>
+
+<blockquote>
+<p>Add this script to your package.json, on scripts section, as follows</p>
+</blockquote>
+
+<div class="highlight highlight-json"><pre>  <span class="err">...</span>
+  <span class="s2">"scripts"</span><span class="err">:</span> <span class="p">{</span>
+     <span class="nt">"dashboard"</span><span class="p">:</span> <span class="s2">"./dashboardinit.js"</span>
+  <span class="p">}</span>
+</pre></div>
+
+<blockquote>
+<p>Give execution permissions to this script:</p>
+</blockquote>
+
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>chmod +x dashboardinit.js
+</pre></div>
+
+<blockquote>
+<p>Now run the script with npm</p>
+</blockquote>
+
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>npm run-script dashboard
+</pre></div>
+
+<blockquote>
+<p>You got it, your admin has been created, now just implement</p>
+</blockquote>
+
+<h2>
+<a name="how-to-initialize" class="anchor" href="#how-to-initialize"><span class="octicon octicon-link"></span></a>How to initialize</h2>
+
+<blockquote>
+<p>First create a file named config.js on the project root folder with this content:</p>
+</blockquote>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./config/'</span> <span class="o">+</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">||</span> <span class="s1">'development'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'.js'</span><span class="p">);</span>
+</pre></div>
+
+<blockquote>
+<p>Then create a folder called config and write inside this new folder two files <strong>development.json</strong> and <strong>production.json</strong>.</p>
+
+<p>Fill both files with this content</p>
+</blockquote>
+
+<div class="highlight highlight-json"><pre><span class="err">module.exports</span> <span class="err">=</span> <span class="p">{</span>
+    <span class="err">mongo:</span> <span class="err">{</span>
+        <span class="nt">"host"</span><span class="p">:</span> <span class="s2">"myhost"</span><span class="p">,</span>
+        <span class="nt">"db"</span><span class="p">:</span> <span class="s2">"mydb"</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+</pre></div>
+
+<p>Other arguments are user, password and port, but for this example we don't need them.</p>
+
+<blockquote>
+<p>On your project main file add the next lines</p>
+</blockquote>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+<span class="p">...</span>
+
+<span class="kd">var</span> <span class="nx">dashboard</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'lastdashboard'</span><span class="p">);</span>
+
+<span class="nx">dashboard</span><span class="p">.</span><span class="nx">models</span><span class="p">.</span><span class="nx">paths</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/models'</span><span class="p">,</span> <span class="c1">// add the models folder to dashboard</span>
+    <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/models.js'</span> <span class="c1">// add the models file to dashboard</span>
+<span class="p">];</span>
+
+<span class="c1">// Pass the mongoose app</span>
+<span class="kd">var</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'mongoose'</span><span class="p">);</span>
+<span class="nx">dashboard</span><span class="p">.</span><span class="nx">models</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">;</span>
+
+<span class="c1">// Pass the express app</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">);</span>
+<span class="nx">dashboard</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="nx">app</span><span class="p">;</span>
+
+<span class="c1">// If you want to create your own templates</span>
+<span class="nx">dashboard</span><span class="p">.</span><span class="nx">templates</span> <span class="o">=</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/templates'</span><span class="p">;</span>
+
+<span class="c1">// If you want to create your own static files</span>
+<span class="nx">dashboard</span><span class="p">.</span><span class="nx">media</span> <span class="o">=</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/static'</span><span class="p">;</span>
+
+<span class="c1">// Run dashboard with base url as param</span>
+<span class="nx">dashboard</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s1">'/dashboard'</span><span class="p">);</span>
+
+<span class="p">...</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">9999</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="add-models-to-dashboard" class="anchor" href="#add-models-to-dashboard"><span class="octicon octicon-link"></span></a>Add models to dashboard</h2>
+
+<blockquote>
+<p>First add statics methods to your mongoose schema</p>
+</blockquote>
+
+<div class="highlight highlight-javascript"><pre>
+<span class="kd">var</span> <span class="nx">dashboard</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'lastdashboard'</span><span class="p">);</span>
+<span class="nx">AppSchema</span><span class="p">.</span><span class="nx">statics</span> <span class="o">=</span> <span class="nx">dashboard</span><span class="p">.</span><span class="nx">models</span><span class="p">.</span><span class="nx">statics</span><span class="p">;</span>
+</pre></div>
+
+<p><strong>NOTE:</strong> <em>dashboard.models.statics</em> contains to methods <em>list</em> and <em>load</em>, that are needed for the dashboard. If you want to custom them, just rewrite them on the schema definition:</p>
+
+<pre><code>AppSchema.statics = {
+    load: function(id, cb) {
+        this.findById(id, cb);
+    },
+    list: function(options, cb) {
+        var meta = options.meta;
+        var criteria = meta.criteria || {};
+        var order = meta.order || {};
+        var list = meta.list;
+        var fields = meta.fields;
+
+        this.find(criteria)
+        .sort(order)
+        .limit(options.perPage)
+        .skip(options.perPage * options.page)
+        .exec(function(err, collection) {
+            cb(err, collection);
+        });
+    }
+}
+</code></pre>
+
+<blockquote>
+<p>Then add the model to dashboard</p>
+</blockquote>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">dashboard</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s1">'apps'</span><span class="p">,</span>
+    <span class="nx">model</span><span class="o">:</span> <span class="s1">'App'</span><span class="p">,</span>
+    <span class="nx">list</span><span class="o">:</span> <span class="p">[</span> <span class="s1">'name'</span><span class="p">,</span> <span class="s1">'description'</span><span class="p">,</span> <span class="s1">'active'</span> <span class="p">],</span>
+    <span class="nx">edit</span><span class="o">:</span> <span class="p">[</span> <span class="s1">'name'</span><span class="p">,</span> <span class="s1">'description'</span><span class="p">,</span> <span class="s1">'active'</span> <span class="p">],</span>
+    <span class="nx">fields</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">'name'</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">header</span><span class="o">:</span> <span class="s1">'App name'</span><span class="p">,</span>
+            <span class="nx">link</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="s1">'description'</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">header</span><span class="o">:</span> <span class="s1">'Description'</span>
+        <span class="p">}</span>
+        <span class="s1">'active'</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">header</span><span class="o">:</span> <span class="s1">'Active'</span><span class="p">,</span>
+            <span class="nx">widget</span><span class="o">:</span> <span class="s1">'checkbox'</span>
+        <span class="p">},</span>
+        <span class="nx">emails</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">header</span><span class="o">:</span> <span class="s1">'Emails'</span><span class="p">,</span>
+            <span class="nx">widget</span><span class="o">:</span> <span class="s1">'csv'</span><span class="p">,</span>
+            <span class="nx">placeholder</span><span class="o">:</span> <span class="s1">'Type an email...'</span><span class="p">,</span>
+            <span class="nx">pattern</span><span class="o">:</span> <span class="s1">'^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$'</span><span class="p">,</span>
+            <span class="nx">link</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">route</span><span class="o">:</span> <span class="s1">'emails'</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">order</span><span class="o">:</span> <span class="p">{</span> <span class="c1">//The attributes to order the results.</span>
+        <span class="nx">createdAt</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">active</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="nx">criteria</span><span class="o">:</span> <span class="p">{</span> <span class="c1">//The attributes to decide what to show and what don't.</span>
+        <span class="nx">active</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<blockquote>
+<p>Ready go to your /dashboard and that's all</p>
+</blockquote>
+
+<h2>
+<a name="questions" class="anchor" href="#questions"><span class="octicon octicon-link"></span></a>Questions?</h2>
+
+<blockquote>
+<p>Please write an issue at <a href="https://github.com/lastroom/lastdashboard/issues">https://github.com/lastroom/lastdashboard/issues</a></p>
+</blockquote>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/lastroom">lastroom</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
