@@ -201,3 +201,6 @@ dashboard.add({
 ## Questions?
 
 > Please write an issue at [https://github.com/lastroom/lastdashboard/issues](https://github.com/lastroom/lastdashboard/issues)
+
+
+Inspired and based on drywal.
