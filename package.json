@@ -1,23 +1,47 @@
 {
     "name": "lastdashboard",
-    "version": "0.0.6",
-    "_id": "lastdashboard@0.0.6",
+    "version": "0.0.7",
+    "description": "Awesome node dashboard, with love from LastRoom at México to you.",
+    "homepage": "",
+    "company": "LastRoom",
+    "keywords": ["dashboard", "mongoose", "mongodb", "node", "lastroom"],
+    "author": {
+        "name": "Julian Ceballos",
+        "email": "julian@lastroom.mx",
+        "url": "https://github.com/julianceballos"
+    },
+    "contributors": [],
     "dependencies": {
         "underscore": "latest",
         "mongoose": "latest",
         "express": "latest",
         "swig": "latest",
         "async": "latest",
-        "execSync": "latest"
+        "execSync": "latest",
+        "yargs": "latest",
+        "prompt": "latest",
+        "mongodb": "latest",
+        "body-parser": "1.0.1",
+        "cookie-parser": "1.0.1",
+        "method-override": "1.0.0",
+        "multer": "0.0.5"
     },
-    "main": "./index.js",
+    "bin": {
+        "lastdashboard": "bin/lastdashboard"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/lastroom/lastdashboard"
     },
+    "preferGlobal": true,
     "engines": {
-        "node": ">=0.10.15"
+        "node": "*"
     },
+    "_id": "lastdashboard@0.0.7",
     "optionalDependencies": {},
-    "scripts": {}
+    "_engineSupported": true,
+    "_npmVersion": "1.2.25",
+    "_nodeVersion": "v0.10.10",
+    "_defaultsLoaded": true,
+    "_from": "lastdashboard"
 }

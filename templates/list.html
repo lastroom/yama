@@ -14,55 +14,20 @@
           <tr>
             <th></th>
             {% for f in list %}
-            <th>{{ fields[f]["header"] }}</th>
+            <th>{{ f }}</th>
             {% endfor %}
             <th></th>
           </tr>
         </thead>
+        {% set index = (page - 1) * perPage %}
         <tbody>
           {% for d in data %}
+          {% set index = index + 1 %}
             <tr>
-              <td>{{ loop.index }}</td>
+              <td><a href="{{ base }}/{{ path }}/{{ d.id }}">{{ index }}</a></td>
               {% for f in list %}
               <td>
-                {{ mapData(d, f, '.') }}
-                {% set type = fields[f]['widget'] %}
-                {% set link = fields[f]['link'] %}
-                {% set multiple = fields[f]['multiple'] %}
-                {% if type == "select" %}
-                    {% if isType(d[f], "string") %}
-                      {% if link %}
-                        <a href="{{ base }}/{{ path }}/{{ d.id }}">{{ d[f] }}</a>
-                      {% else %}
-                        {{ d[f] }}
-                      {% endif %}
-                    {% elseif isType(d[f], "object") %}
-                      {{ mapData(d[f], fields[f]['display'], '.') }}
-                      {% if link %}
-                        <a href="{{ base }}/{{ fields[f].route|default(path) }}/{{ d[f].id }}">{{ d[f][fields[f]['display']] }}</a>
-                      {% else %}
-                        {{ d[f][fields[f]['display']] }}
-                      {% endif %}
-                    {% else %}
-                      {% for v in d[f] %}
-                        {% if fields[f].ref %}
-                          {% if link %}
-                              <a href="{{ base }}/{{ path }}/{{ v.id }}">{{ v[fields[f].display] }}</a>{% if loop.last %}{% else %}, {% endif %}
-                          {% else %}
-                              {{ v[fields[f].display] }}{% if loop.last %}{% else %}, {% endif %}
-                          {% endif %}
-                        {% else %}
-                          {{ v }}{% if loop.last %}{% else %}, {% endif %}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                {% else %}
-                    {% if link %}
-                        <a href="{{ base }}/{{ path }}/{{ d.id }}">{{ d[f] }}</a>
-                    {% else %}
-                        {{ d[f] }}
-                    {% endif %}
-                {% endif %}
+                <a href="{{ base }}/{{ path }}/{{ d.id }}">{{ d[f] }}</a>
               </td>
               {% endfor %}
               <td>
@@ -78,15 +43,15 @@
       <table width="50%" style="border-bottom: 0;">
         <tr>
             {% if page > 1 %}
-            <td width="25%"><a href="{{ base }}/{{ path }}?page=1">First</a></td>
-            <td width="25%"><a href="{{ base }}/{{ path }}?page={{ decrease(page) }}"> &lt;&lt; Previous</a></td>
+            <td width="25%"><a href="{{ base }}/{{ path }}?page=1&perpage={{ perPage }}">First</a></td>
+            <td width="25%"><a href="{{ base }}/{{ path }}?page={{ decrease(page) }}&perpage={{ perPage }}"> &lt;&lt; Previous</a></td>
             {% else %}
             <td width="25%"><span>First</span></td>
             <td width="25%"><span> &lt;&lt; Previous</span></td>
             {% endif %}
             {% if page < pages %}
-            <td width="25%"><a href="{{ base }}/{{ path }}?page={{ increase(page) }}">Next &gt;&gt;</a></td>
-            <td width="25%"><a href="{{ base }}/{{ path }}?page={{ pages }}">Last</a></td>
+            <td width="25%"><a href="{{ base }}/{{ path }}?page={{ increase(page) }}&perpage={{ perPage }}">Next &gt;&gt;</a></td>
+            <td width="25%"><a href="{{ base }}/{{ path }}?page={{ pages }}&perpage={{ perPage }}">Last</a></td>
             {% else %}
             <td width="25%"><span>Next &gt;&gt;</span></td>
             <td width="25%"><span>Last</span></td>

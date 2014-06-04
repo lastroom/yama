@@ -16,80 +16,31 @@ Awesome node dashboard, with love from LastRoom at México to you.
 
 ## How to install
 
-> On your project directory install the node module as follows:
+```sh
+$ npm install -g lastdashboard
+```
+
+## Initialize your project dashboard database
 
 ```sh
-$ npm install lastdashboard
+$ lastdashboard init
 ```
 
-## How to create the first admin
+This command ask for the host, database, port, user, password, email and password.
 
-> for create the first admin, just create a file **dashboardinit.js** with the content below
+## How to implements
 
-```javascript
-#!/usr/bin/env node
-
-var dashboard = require('lastdashboard');
-
-dashboard.initializeDB({
-        host: "myhost",
-        db:"mydatabase"
-    }, {
-        email: "admin@mycompany.com",
-        password: "passphrase"
-    });
-```
-
-> Add this script to your package.json, on scripts section, as follows
-
-```json
-  ...
-  "scripts": {
-     "dashboard": "./dashboardinit.js"
-  }
-```
-
-> Give execution permissions to this script:
-
-```sh
-$ chmod +x dashboardinit.js
-```
-
-> Now run the script with npm
-
-```sh
-$ npm run-script dashboard
-```
-
-> You got it, your admin has been created, now just implement
-
-## How to initialize
-
-> First create a file named config.js on the project root folder with this content:
-
-```javascript
-module.exports = require('./config/' + (process.env.NODE_ENV || 'development') + '.js');
-```
-
-> Then create a folder called config and write inside this new folder two files **development.json** and **production.json**.
-
-> Fill both files with this content
-
-```json
-module.exports = {
-    mongo: {
-        "host": "myhost",
-        "db": "mydb"
-    }
-}
-```
-
-Other arguments are user, password and port, but for this example we don't need them.
+Finally just write the next lines:
 
 > On your project main file add the next lines
 
 ```javascript
+//Initialize express app
 var app = express();
+
+//Initialize connection to mongo
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://host:port/database');
 
 ...
 
@@ -101,7 +52,6 @@ dashboard.models.paths = [
 ];
 
 // Pass the mongoose app
-var mongoose = require('mongoose');
 dashboard.models.app = mongoose;
 
 // Pass the express app
@@ -118,74 +68,19 @@ dashboard.media = __dirname + '/static';
 dashboard.run('/dashboard');
 
 ...
-
-app.listen(9999);
+//Run app at any available port
+app.listen(port);
 ```
 
 ## Add models to dashboard
 
-> First add statics methods to your mongoose schema
-
 ```javascript
-
 var dashboard = require('lastdashboard');
-AppSchema.statics = dashboard.models.statics;
-```
 
-**NOTE:** *dashboard.models.statics* contains to methods *list* and *load*, that are needed for the dashboard. If you want to custom them, just rewrite them on the schema definition:
-
-```
-AppSchema.statics = {
-    load: function(id, cb) {
-        this.findById(id, cb);
-    },
-    list: function(options, cb) {
-        var meta = options.meta;
-        var criteria = meta.criteria || {};
-        var order = meta.order || {};
-        var list = meta.list;
-        var fields = meta.fields;
-
-        this.find(criteria)
-        .sort(order)
-        .limit(options.perPage)
-        .skip(options.perPage * options.page)
-        .exec(function(err, collection) {
-            cb(err, collection);
-        });
-    }
-}
-```
-
-> Then add the model to dashboard
-
-```javascript
 dashboard.add({
-    path: 'apps',
-    model: 'App',
-    list: [ 'name', 'description', 'active' ],
-    edit: [ 'name', 'description', 'active' ],
-    fields: {
-        'name': {
-            header: 'App name',
-            link: true
-        },
-        'description': {
-            header: 'Description'
-        }
-        'active': {
-            header: 'Active',
-            widget: 'checkbox'
-        },
-        emails: {
-            header: 'Emails',
-            widget: 'csv',
-            placeholder: 'Type an email...',
-            pattern: '^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$',
-            link: true,
-            route: 'emails'
-        }
-    },
+    model: 'User',
+    exclude: [], //Fields exclude fields from model.
+    fields: [], //Fields to include from model.
     order: { //The attributes to order the results.
         createdAt: 1,
         active: 1

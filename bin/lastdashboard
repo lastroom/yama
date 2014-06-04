@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+var yargs = require('yargs'),
+    fs = require('fs');
+
+//Local imports
+var pkg = JSON.parse(fs.readFileSync('./package.json').toString()),
+    init = require('../scripts/init.js');
+
+var usage = '\nLast Dashboard - Awesome node dashboard, with love from LastRoom at México to you.\n\n'
+    + '{usage} lastdashboard subcommand [options]\n\n'
+    + 'Options:\n'
+    + '   -v,   --version   Outputs the version of wonka js that you have installed\n'
+    + '   -h,   --help      Outputs help information\n\n'
+    + 'Available subcommands:\n'
+    + '   init [options]   Initialize dashboard database\n'
+    + '\n'
+    + 'Init subcommand options:\n'
+    + '   host\n'
+    + '   port\n'
+    + '   database\n'
+    + '   user\n'
+    + '   password\n';
+
+var args = yargs.argv;
+
+if (args.help ||  args.h) {
+    console.info(usage);
+} else if (args.version || args.v) {
+    console.info(pkg.version);
+} else if (args._.indexOf('init') != -1) {
+    if (!args.database) {
+        console.info('You must provide almost the database to initialize it.\nIf you need help run: $ lastdashboard --help');
+        process.exit(0);
+    }
+    var opts = {
+        host: args.host || 'localhost',
+        port: args.port || 27017,
+        database: args.database,
+        user: args.user || '',
+        password: args.password || ''
+    };
+    init(opts);
+} else {
+    console.info(args._[0] + ': is not a valid argument.\nIf you need help run: $ lastdashboard --help');
+}

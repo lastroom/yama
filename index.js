@@ -1,1 +1,1 @@
-module.exports = require('./lib/dashboard');
+module.exports = require('./lib/admin');
