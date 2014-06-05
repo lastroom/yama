@@ -1,7 +1,8 @@
 {
-    "name": "lastdashboard",
-    "version": "0.0.7",
-    "description": "Awesome node dashboard, with love from LastRoom at México to you.",
+    "name": "yama",
+    "version": "0.0.9",
+    "_id": "yama@0.0.9",
+    "description": "Awesome node-mongoose dashboard, with love from LastRoom at México to you.",
     "homepage": "",
     "company": "LastRoom",
     "keywords": ["dashboard", "mongoose", "mongodb", "node", "lastroom"],
@@ -27,21 +28,20 @@
         "multer": "0.0.5"
     },
     "bin": {
-        "lastdashboard": "bin/lastdashboard"
+        "yama": "bin/yama"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/lastroom/lastdashboard"
+        "url": "https://github.com/lastroom/yama"
     },
     "preferGlobal": true,
     "engines": {
         "node": "*"
     },
-    "_id": "lastdashboard@0.0.7",
     "optionalDependencies": {},
     "_engineSupported": true,
     "_npmVersion": "1.2.25",
     "_nodeVersion": "v0.10.10",
     "_defaultsLoaded": true,
-    "_from": "lastdashboard"
+    "_from": "yama"
 }

@@ -1,7 +1,7 @@
-Last Dashboard
-=============
+Yet another mongoose admin
+==========================
 
-Awesome node dashboard, with love from LastRoom at México to you.
+Awesome node-mongoose admin, with love from LastRoom at México to you.
 
 ## Technologies
 
@@ -17,13 +17,13 @@ Awesome node dashboard, with love from LastRoom at México to you.
 ## How to install
 
 ```sh
-$ npm install -g lastdashboard
+$ npm install -g yama
 ```
 
-## Initialize your project dashboard database
+## Initialize your project admin database
 
 ```sh
-$ lastdashboard init
+$ yama init
 ```
 
 This command ask for the host, database, port, user, password, email and password.
@@ -44,40 +44,40 @@ mongoose.connect('mongodb://host:port/database');
 
 ...
 
-var dashboard = require('lastdashboard');
+var admin = require('yama');
 
-dashboard.models.paths = [
-    __dirname + '/models', // add the models folder to dashboard
-    __dirname + '/models.js' // add the models file to dashboard
+admin.models.paths = [
+    __dirname + '/models', // add the models folder to admin
+    __dirname + '/models.js' // add the models file to admin
 ];
 
 // Pass the mongoose app
-dashboard.models.app = mongoose;
+admin.models.app = mongoose;
 
 // Pass the express app
 var app = require('express');
-dashboard.app = app;
+admin.app = app;
 
 // If you want to create your own templates
-dashboard.templates = __dirname + '/templates';
+admin.templates = __dirname + '/templates';
 
 // If you want to create your own static files
-dashboard.media = __dirname + '/static';
+admin.media = __dirname + '/static';
 
-// Run dashboard with base url as param
-dashboard.run('/dashboard');
+// Run admin with base url as param
+admin.run('/admin');
 
 ...
 //Run app at any available port
 app.listen(port);
 ```
 
-## Add models to dashboard
+## Add models to admin
 
 ```javascript
-var dashboard = require('lastdashboard');
+var admin = require('yama');
 
-dashboard.add({
+admin.add({
     model: 'User',
     exclude: [], //Fields exclude fields from model.
     fields: [], //Fields to include from model.
@@ -91,11 +91,10 @@ dashboard.add({
 });
 ```
 
-> Ready go to your /dashboard and that's all
+> Ready go to your /admin and that's all
 
 ## Questions?
 
-> Please write an issue at [https://github.com/lastroom/lastdashboard/issues](https://github.com/lastroom/lastdashboard/issues)
-
+> Please write an issue at [https://github.com/lastroom/lastadmin/issues](https://github.com/lastroom/lastadmin/issues)
 
 Inspired and based on drywal.
