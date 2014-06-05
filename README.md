@@ -14,6 +14,15 @@ Awesome node-mongoose admin, with love from LastRoom at México to you.
 |async     |          |
 |execSync  |          |
 
+## Screenshots
+
+
+![Alt tag](https://raw.githubusercontent.com/lastroom/yama/master/screenshots/Screen%20Shot%202014-06-05%20at%2018.05.19.png)
+
+
+![Alt tag](https://raw.githubusercontent.com/lastroom/yama/master/screenshots/Screen%20Shot%202014-06-05%20at%2018.05.43.png)
+
+
 ## How to install
 
 ```sh
