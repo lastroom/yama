@@ -16,12 +16,15 @@ Awesome node-mongoose admin, with love from LastRoom at México to you.
 
 ## Screenshots
 
-
 ![Alt tag](https://raw.githubusercontent.com/lastroom/yama/master/screenshots/Screen%20Shot%202014-06-05%20at%2018.05.19.png)
-
 
 ![Alt tag](https://raw.githubusercontent.com/lastroom/yama/master/screenshots/Screen%20Shot%202014-06-05%20at%2018.05.43.png)
 
+Try the demo at: http://yamajs.com/admin
+
+Email: demo@lastroom.mx
+
+Password: password
 
 ## How to install
 
