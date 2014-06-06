@@ -1,7 +1,7 @@
 {
     "name": "yama",
-    "version": "0.0.9",
-    "_id": "yama@0.0.9",
+    "version": "1.0.0",
+    "_id": "yama@1.0.0",
     "description": "Awesome node-mongoose dashboard, with love from LastRoom at México to you.",
     "homepage": "",
     "company": "LastRoom",
