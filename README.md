@@ -38,13 +38,13 @@ $ npm install -g yama
 $ yama init --database=whatever
 ```
 
+This command ask for the host, database, port, user, password, email and password.
+
 > If you need help
 
 ```sh
 $ yama --help
 ```
-
-This command ask for the host, database, port, user, password, email and password.
 
 ## How to implements
 
