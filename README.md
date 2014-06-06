@@ -35,7 +35,13 @@ $ npm install -g yama
 ## Initialize your project admin database
 
 ```sh
-$ yama init
+$ yama init --database=whatever
+```
+
+> If you need help
+
+```sh
+$ yama --help
 ```
 
 This command ask for the host, database, port, user, password, email and password.
@@ -89,10 +95,33 @@ app.listen(port);
 ```javascript
 var admin = require('yama');
 
-admin.add({
-    model: 'User',
-    exclude: [], //Fields exclude fields from model.
-    fields: [], //Fields to include from model.
+admin.add('users', 'User', UserSchema, {
+    label: 'My users',
+    list: ['fullName', 'active'],
+    edit: ['fullName', 'active', 'role', 'emails'],
+    fields: {
+        fullName: {
+            header: 'Full name',
+            widget: 'text'
+        },
+        active: {
+            header: 'Active',
+            widget: 'checkbox'
+        },
+        role: {
+            header: 'Roles',
+            ref: 'Role',
+            widget: 'select',
+            multiple: true,
+            display: 'name'
+        },
+        emails: {
+            header: 'Emails',
+            widget: 'csv',
+            placeholder: 'Type an email...',
+            pattern: '^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$'
+        }
+    },
     order: { //The attributes to order the results.
         createdAt: 1,
         active: 1
@@ -102,6 +131,15 @@ admin.add({
     }
 });
 ```
+
+## Widgets
+
+* select [aditional attributes: multiple as true or false]
+* text
+* textarea
+* checkbox
+* radio
+* csv
 
 > Ready go to your /admin and that's all
 
