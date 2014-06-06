@@ -107,6 +107,6 @@ admin.add({
 
 ## Questions?
 
-> Please write an issue at [https://github.com/lastroom/lastadmin/issues](https://github.com/lastroom/yama/issues)
+> Please write an issue at [https://github.com/lastroom/yama/issues](https://github.com/lastroom/yama/issues)
 
 Inspired and based on drywal.
