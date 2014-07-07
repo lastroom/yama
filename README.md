@@ -143,6 +143,15 @@ admin.add('users', 'User', UserSchema, {
 
 > Ready go to your /admin and that's all
 
+## What's next?
+
+Three features i think would be awesome for integrate by default on yama are:
+
+* Search filters by field
+* Graphics for lists
+* Order lists
+* Download lists as CSV
+
 ## Questions?
 
 > Please write an issue at [https://github.com/lastroom/yama/issues](https://github.com/lastroom/yama/issues)
