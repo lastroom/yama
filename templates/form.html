@@ -41,6 +41,8 @@
                         <ul class="tagit" data-field-name="{{ mapName(f, '.') }}" id="{{ mapName(f, '.') }}" data-placeholder-text="{{ fields[f].placeholder|default("") }}" data-pattern="{{ fields[f].pattern|default("") }}">
                             {% for v in doc[f] %} <li>{{ v }}</li> {% endfor %} <li></li>
                         </ul>
+                    {% elseif type == "textarea" %}
+                        <textarea class="form-control" id="{{ mapName(f, ',') }}" name="{{ mapName(f, ',') }}">{{ doc[f] || "" }}</textarea>
                     {% else %}
                         {% if type == "checkbox" %}
                             <input type="hidden" name="{{ mapName(f, '.') }}" value="{% if doc[f] %}true{% else %}false{% endif %}">

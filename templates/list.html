@@ -19,7 +19,8 @@
             <th></th>
           </tr>
         </thead>
-        {% set index = (page - 1) * perPage %}
+        {% set first = page - 1 %}
+        {% set index = first * perPage %}
         <tbody>
           {% for d in data %}
           {% set index = index + 1 %}
