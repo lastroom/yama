@@ -127,21 +127,21 @@ admin.add('users', 'User', UserSchema, {
 });
 ```
 
-## Attributes
-
-### models.paths
-
-> 
-
-### models.app
-
-### app
-
-### templates
-
-### media
-
 ## Functions
+
+### run
+
+> Run the admin site with options
+
+#### Arguments
+
+* path: process.cwd(),
+* express: Express app initialized
+* mongoose: Mongoose connection app
+* models: Array with the routes where models are allocated
+* url: url for the admin site
+* templates: Admin site templates, argument optional
+* media: Admin site statics, argument optional
 
 ### add
 
