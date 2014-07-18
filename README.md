@@ -92,6 +92,17 @@ app.listen(port);
 
 ## Add models to admin
 
+Use the function **add**.
+
+### add
+
+#### Arguments
+
+* path
+* modelName
+* schema
+* options
+
 ```javascript
 var admin = require('yama');
 
