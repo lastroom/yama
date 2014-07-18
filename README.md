@@ -62,28 +62,23 @@ mongoose.connect('mongodb://host:port/database');
 
 ...
 
-var admin = require('yama');
-
-admin.models.paths = [
-    __dirname + '/models', // add the models folder to admin
-    __dirname + '/models.js' // add the models file to admin
-];
-
-// Pass the mongoose app
-admin.models.app = mongoose;
-
 // Pass the express app
 var app = require('express');
-admin.app = app;
 
-// If you want to create your own templates
-admin.templates = __dirname + '/templates';
+var admin = require('yama');
 
-// If you want to create your own static files
-admin.media = __dirname + '/static';
-
-// Run admin with base url as param
-admin.run('/admin');
+// Run admin with options
+admin.run({
+    path: process.cwd(),
+    express: app,
+    mongoose: mongoose,
+    models: [
+        process.cwd() + '/move/models'
+    ],
+    url: '/admin',
+    templates: process.cwd() + '/admin', // Optional
+    media: process.cwd() + '/static/admin' // Optional
+});
 
 ...
 //Run app at any available port
@@ -91,17 +86,6 @@ app.listen(port);
 ```
 
 ## Add models to admin
-
-Use the function **add**.
-
-### add
-
-#### Arguments
-
-* path
-* modelName
-* schema
-* options
 
 ```javascript
 var admin = require('yama');
@@ -142,6 +126,33 @@ admin.add('users', 'User', UserSchema, {
     }
 });
 ```
+
+## Attributes
+
+### models.paths
+
+> 
+
+### models.app
+
+### app
+
+### templates
+
+### media
+
+## Functions
+
+### add
+
+> Add an model description to the admin site
+
+#### Arguments
+
+* path
+* modelName
+* schema
+* options
 
 ## Widgets
 
