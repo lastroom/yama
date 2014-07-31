@@ -54,6 +54,7 @@ Finally just write the next lines:
 
 ```javascript
 //Initialize express app
+var express = require('express');
 var app = express();
 
 //Initialize connection to mongo
@@ -62,13 +63,10 @@ mongoose.connect('mongodb://host:port/database');
 
 ...
 
-// Pass the express app
-var app = require('express');
-
 var admin = require('yama');
 
 // Run admin with options
-admin.run({
+admin.init({
     path: process.cwd(),
     express: app,
     mongoose: mongoose,
@@ -129,7 +127,7 @@ admin.add('users', 'User', UserSchema, {
 
 ## Functions
 
-### run
+### init
 
 > Run the admin site with options
 
