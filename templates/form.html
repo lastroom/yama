@@ -13,7 +13,7 @@
 <h2>{% if id %}Edit {{ meta.model }}{% else %}New {{ meta.model }}{% endif %}</h2>
 <hr>
 <div id="form">
-    <form action="{{ action }}" class="form-horizontal" method="post" enctype="multipart/form-data" role="form" autocomplete="off">
+    <form action="{{ action }}" class="form-horizontal" method="post" role="form" autocomplete="off">
         {% for f in edit %}
             <div class="control-group">
                 {% set type = fields[f]['widget'] || "text" %}

@@ -28,7 +28,7 @@
               <td><a href="{{ base }}/{{ path }}/{{ d.id }}">{{ index }}</a></td>
               {% for f in list %}
               <td>
-                <a href="{{ base }}/{{ path }}/{{ d.id }}">{{ d[f] }}</a>
+                <a href="{{ base }}/{{ path }}/{{ d.id }}">{{ d[f] || "" }}</a>
               </td>
               {% endfor %}
               <td>
