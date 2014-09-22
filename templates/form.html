@@ -17,7 +17,7 @@
         {% for f in edit %}
             <div class="control-group">
                 {% set type = fields[f]['widget'] || "text" %}
-                {% set header = fields[f]['header'] %}
+                {% set header = fields[f]['header'] || f %}
                 {% set name = fields[f]['name'] || f %}
                 {% set multiple = fields[f]['multiple'] %}
                 <label for="{{ f }}" class="control-label">
@@ -55,8 +55,8 @@
             </div>
         {% endfor %}
         <div class="form-actions">
-            <button class="btn" type="button" onclick="history.back();">Atras</button>
-            <button class="btn btn-primary" type="submit">Enviar</button>
+            <button class="btn" type="button" onclick="history.back();">Cancel</button>
+            <button class="btn btn-primary" type="submit">Save</button>
         </div>
     </form>
 </div>
