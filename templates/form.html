@@ -20,17 +20,27 @@
                 {% set header = fields[f]['header'] || f %}
                 {% set name = fields[f]['name'] || f %}
                 {% set multiple = fields[f]['multiple'] %}
+                {% set readonly = fields[f]['readonly'] || false %}
                 <label for="{{ f }}" class="control-label">
                     {{ header }}:
                 </label>
                 <div class="controls">
                     {{ mapData(doc, f, '.') }}
-                    {% if type == "select" %}
+                    {% if readonly %}
+                        {% if doc[f] %}
+                            {% if fields[f].display && doc[f] %}
+                                {{ doc[f][fields[f].display] }}
+                            {% else %}
+                              {{ doc[f] ? doc[f] : '' }}
+                            {% endif %}
+                        {% endif %}
+                    {% elseif type == "select" %}
+                        {% set sel = doc[f] ? doc[f]['_id'] : null %}
                         <select name="{{ mapName(f, '.') }}" id="{{ mapName(f, '.') }}" {% if multiple %}multiple{% endif %}>
                             {% set values = fields[f]['values'] %}
                             {% for v in values %}
-                                {% set sel = doc[f] %}
-                                {% if fields[f]['ref'] %}
+                                {% if v.value %}
+
                                 <option value="{{ v.value }}" {% if exists(v.value, sel) %}selected{% endif %}>{{ v.display }}</option>
                                 {% else %}
                                 <option value="{{ v }}" {% if v == sel %}selected{% endif %}>{{ v }}</option>
