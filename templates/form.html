@@ -10,7 +10,7 @@
     {% set id = doc._id %}
 {% endif %}
 
-<h2>{% if id %}Edit {{ meta.model }}{% else %}New {{ meta.model }}{% endif %}</h2>
+<h1>{% if id %}Edit {{ meta.model }}{% else %}New {{ meta.model }}{% endif %}</h1>
 <hr>
 <div id="form">
     <form action="{{ action }}" class="form-horizontal" method="post" role="form" autocomplete="off">

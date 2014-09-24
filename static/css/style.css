@@ -219,3 +219,7 @@ background-color: #fbfbfd;
 .table-condensed th, .table-condensed td {
     padding: 20px 5px!important;
 }
+
+th.sort{
+  cursor: pointer;
+}

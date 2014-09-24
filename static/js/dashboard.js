@@ -27,4 +27,22 @@ $(document).ready(function() {
         $(this).tagit(options);
     });
 
+    $('thead th.sort').each(function() {
+        var _this = $(this);
+        var sortField = _this.attr('data-sort');
+        _this.on('click', function(e) {
+            var filterForm = $('#filters form');
+            var sortByField = $('input[name="sort_by"]', filterForm);
+            var orderField = $('input[name="order"]', filterForm);
+            // Reset order
+            if (sortByField.val() !== sortField) {
+                orderField.val(1);
+            } else {
+                orderField.val(-1 * orderField.val());
+            }
+            sortByField.val(sortField);
+
+            filterForm.submit();
+        });
+    });
 });

@@ -1,9 +1,16 @@
 {% extends "layouts/default.html" %}
 
+
+{% block filters %}
+  {% if filters && filters.length > 0 %}
+    {% include "includes/filters.html" %}
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 <div id="list">
     <div id="list-top">
-        <h2>{{ title }}</h2>
+        <h1>{{ title }}</h1>
         <div id="new">
           <a href="{{ base }}/{{ path }}/new" class="btn btn-primary" role="button">+ New</a>
         </div>
@@ -14,11 +21,7 @@
           <tr>
             <th></th>
             {% for f in list %}
-              {% if (fields[f] && fields[f].header) %}
-                <th>{{ fields[f].header }}</th>
-              {% else %}
-                <th>{{ f }}</th>
-              {% endif %}
+              <th class="sort" data-sort="{{ f }}">{{ fields[f].header }}</th>
             {% endfor %}
             <th></th>
           </tr>
@@ -67,6 +70,9 @@
             <td width="25%"><span>Next &gt;&gt;</span></td>
             <td width="25%"><span>Last</span></td>
             {% endif %}
+        </tr>
+        <tr>
+            <td colspan="4">Page {{ page }} / {{ pages }}, {{ count }} results.</td>
         </tr>
     </table>
 </div>
