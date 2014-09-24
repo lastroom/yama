@@ -39,7 +39,7 @@
                         <select name="{{ mapName(f, '.') }}" id="{{ mapName(f, '.') }}" {% if multiple %}multiple{% endif %}>
                             {% set values = fields[f]['values'] %}
                             {% for v in values %}
-                                {% if v.value %}
+                                {% if isType(v, 'object') %}
 
                                 <option value="{{ v.value }}" {% if exists(v.value, sel) %}selected{% endif %}>{{ v.display }}</option>
                                 {% else %}
