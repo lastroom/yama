@@ -6,8 +6,8 @@
   <form action="{{ action }}" class="" method="get" role="form">
     <input type="hidden" name="page" value="1" />
     <input type="hidden" name="perpage" value="{{ perPage }}" />
-    <input type="text" name="sort_by" value="{{ query.sort_by }}" />
-    <input type="text" name="order" value="{{ query.order }}" />
+    <input type="hidden" name="sort_by" value="{{ query.sort_by }}" />
+    <input type="hidden" name="order" value="{{ query.order }}" />
 
     {% for f in filters %}
       <div class="control-group">

@@ -124,12 +124,6 @@ a {
 }
 
 
-
-.table-striped tbody > tr:nth-child(odd) > td,
-.table-striped tbody > tr:nth-child(odd) > th {
-  background-color: #fbfbfd;
-}
-
 .well {
     background-color: #fbfbfd;
     -webkit-border-radius: 0!important;
