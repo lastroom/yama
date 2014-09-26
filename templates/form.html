@@ -35,7 +35,8 @@
                             {% endif %}
                         {% endif %}
                     {% elseif type == "select" %}
-                        {% set sel = doc[f] ? doc[f]['_id'] : null %}
+                        {% set sel = getSelectedValue(doc, f, fields) %}
+
                         <select name="{{ mapName(f, '.') }}" id="{{ mapName(f, '.') }}" {% if multiple %}multiple{% endif %}>
                             {% set values = fields[f]['values'] %}
                             {% for v in values %}
