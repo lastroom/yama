@@ -39,7 +39,7 @@
                   {% if fields[f] && fields[f]['display'] && d[f] && !fields[f]['to_string'] %}
                     {{ d[f][fields[f]['display']] }}
                   {% else %} 
-                    {{ d[f] || "" }}
+                    {{ d[f] || "" |raw }}
                   {% endif %}
                 </a>
               </td>
