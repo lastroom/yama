@@ -1,37 +1,39 @@
 {% extends "layouts/default.html" %}
 
 {% block content %}
-    <h2>Information</h2>
+    <h1>Information</h1>
     <hr>
     <table class="table table-bordered">
         {% for f in edit %}
         <tr>
             {{ mapData(doc, f, '.') }}
-            <th>{{ fields[f].header }}</th>
+            <th>{{ fields[f].header || f }}</th>
             <td>
-            {% if fields[f].widget == "select" %}
-                {% if isType(doc[f], "string") %}
-                      {{ doc[f] }}
-                    {% elseif isType(doc[f], "object") %}
-                      {{ mapData(doc[f], fields[f]['display'], '.') }}
-                      {{ doc[f][fields[f]['display']] }}
-                    {% else %}
-                      {% for v in doc[f] %}
-                        {% if fields[f].ref %}
-                            {{ v[fields[f].display] }}{% if loop.last %}{% else %}, {% endif %}
+            {% if doc[f] %}
+                {% if fields[f].widget == "select" %}
+                    {% if isType(doc[f], "string") %}
+                          {{ doc[f] }}
+                        {% elseif isType(doc[f], "object") %}
+                          {{ mapData(doc[f], fields[f]['display'], '.') }}
+                          {{ doc[f][fields[f]['display']] }}
                         {% else %}
-                          {{ v }}{% if loop.last %}{% else %}, {% endif %}
+                          {% for v in doc[f] %}
+                            {% if fields[f].ref %}
+                                {{ v[fields[f].display] }}{% if loop.last %}{% else %}, {% endif %}
+                            {% else %}
+                              {{ v }}{% if loop.last %}{% else %}, {% endif %}
+                            {% endif %}
+                          {% endfor %}
                         {% endif %}
-                      {% endfor %}
-                    {% endif %}
-            {% else %}
-                {{ doc[f] }}
+                {% else %}
+                    {{ doc[f] }}
+                {% endif %}
             {% endif %}
             </td>
         <tr>
         {% endfor %}
     </table>
     <div class="form-actions">
-        <button class="btn" type="button" onclick="history.back();">Atras</button>
+        <button class="btn" type="button" onclick="history.back();">Cancel</button>
     </div>
 {% endblock %}

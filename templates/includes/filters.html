@@ -1,0 +1,59 @@
+{% set action = base + "/" + path %}
+{# to have exactly the same code than form.html #}
+{% set doc = query; %}
+<h3>Filters</h3>
+<div id="filters">
+  <form action="{{ action }}" class="" method="get" role="form">
+    <input type="hidden" name="page" value="1" />
+    <input type="hidden" name="perpage" value="{{ perPage }}" />
+    <input type="hidden" name="sort_by" value="{{ query.sort_by }}" />
+    <input type="hidden" name="order" value="{{ query.order }}" />
+
+    {% for f in filters %}
+      <div class="control-group">
+        {% set type = fields[f]['widget'] || "text" %}
+        {% set header = fields[f]['header'] || f %}
+        {% set name = fields[f]['name'] || f %}
+        {% set multiple = fields[f]['multiple'] %}
+        {% set readonly = fields[f]['readonly'] || false %}
+        <label for="{{ f }}" class="control-label">
+            {{ header }}:
+        </label>
+        <div class="controls">
+            {{ mapData(doc, f, '.') }}
+            {% if readonly %}
+            {% elseif type == "select" %}
+                {% set sel = doc[f] ? doc[f]['_id'] : null %}
+                <select name="{{ mapName(f, '.') }}" id="{{ mapName(f, '.') }}" {% if multiple %}multiple{% endif %}>
+                    {% set values = fields[f]['values'] %}
+                    {% for v in values %}
+                        {% if isType(v, 'object') %}
+
+                        <option value="{{ v.value }}" {% if exists(v.value, sel) %}selected{% endif %}>{{ v.display }}</option>
+                        {% else %}
+                        <option value="{{ v }}" {% if v == sel %}selected{% endif %}>{{ v }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            {% elseif type == "csv" %}
+                <ul class="tagit" data-field-name="{{ mapName(f, '.') }}" id="{{ mapName(f, '.') }}" data-placeholder-text="{{ fields[f].placeholder|default("") }}" data-pattern="{{ fields[f].pattern|default("") }}">
+                    {% for v in doc[f] %} <li>{{ v }}</li> {% endfor %} <li></li>
+                </ul>
+            {% elseif type == "textarea" %}
+                <textarea class="form-control" id="{{ mapName(f, ',') }}" name="{{ mapName(f, ',') }}">{{ doc[f] || "" }}</textarea>
+            {% else %}
+                {% if type == "checkbox" %}
+                    <input type="hidden" name="{{ mapName(f, '.') }}" value="{% if doc[f] %}true{% else %}false{% endif %}">
+                    <input type="{{ type }}" id="{{ mapName(f, '.') }}" class="form-control" autocomplete="off" value="1" {% if doc[f] == 'true' %}checked{% endif %}>
+                {% else %}
+                    <input type="{{ type }}" id="{{ mapName(f, '.') }}" class="form-control" name="{{ mapName(f, '.') }}" placeholder="Type {{ header }}" autocomplete="off" value="{{ doc[f] || "" }}">
+                {% endif %}
+            {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Filter</button>
+    </div>
+  </form>
+</div>

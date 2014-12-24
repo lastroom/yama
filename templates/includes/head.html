@@ -7,8 +7,13 @@
   <script src="{{ staticUrl }}/js/html5shiv.js" type="text/javascript"></script>
   <script src="{{ staticUrl }}/js/respond.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="{{ staticUrl }}/css/jquery-ui.css" type="text/css">
-  <link rel="stylesheet" href="{{ staticUrl }}/css/bootstrap.css" type="text/css">
-  <link rel="stylesheet" href="{{ staticUrl }}/css/bootstrap-responsive.css" type="text/css">
-  <link rel="stylesheet" href="{{ staticUrl }}/css/tagit.css" type="text/css">
-  <link rel="stylesheet" href="{{ staticUrl }}/css/style.css" type="text/css">
+  <link rel="stylesheet" href="{{ staticUrl }}/css/bootstrap.css" type="text/css"/>
+  <link rel="stylesheet" href="{{ staticUrl }}/css/bootstrap-responsive.css" type="text/css"/>
+  <link rel="stylesheet" href="{{ staticUrl }}/css/tagit.css" type="text/css"/>
+  <link rel="stylesheet" href="{{ staticUrl }}/css/style.css" type="text/css"/>
+
+  {% if custom_css %}
+    {% for cssfile in custom_css %}<link rel="stylesheet" href="{{ cssfile }}" type="text/css"/>
+    {% endfor %}
+  {% endif %}
 </head>
