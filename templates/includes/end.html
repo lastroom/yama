@@ -3,3 +3,7 @@
 <script src="{{ staticUrl }}/js/bootstrap.min.js"></script>
 <script src="{{ staticUrl }}/js/tagit.js"></script>
 <script src="{{ staticUrl }}/js/dashboard.js"></script>
+{% if custom_js %}
+  {% for jsfile in custom_js %}<script src="{{ jsfile }}"></script>
+  {% endfor %}
+{% endif %}

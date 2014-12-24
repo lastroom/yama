@@ -124,12 +124,6 @@ a {
 }
 
 
-
-.table-striped tbody > tr:nth-child(odd) > td,
-.table-striped tbody > tr:nth-child(odd) > th {
-  background-color: #fbfbfd;
-}
-
 .well {
     background-color: #fbfbfd;
     -webkit-border-radius: 0!important;
@@ -218,4 +212,8 @@ background-color: #fbfbfd;
 
 .table-condensed th, .table-condensed td {
     padding: 20px 5px!important;
+}
+
+th.sort{
+  cursor: pointer;
 }

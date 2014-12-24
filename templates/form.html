@@ -10,27 +10,38 @@
     {% set id = doc._id %}
 {% endif %}
 
-<h2>{% if id %}Edit {{ meta.model }}{% else %}New {{ meta.model }}{% endif %}</h2>
+<h1>{% if id %}Edit {{ meta.model }}{% else %}New {{ meta.model }}{% endif %}</h1>
 <hr>
 <div id="form">
     <form action="{{ action }}" class="form-horizontal" method="post" role="form" autocomplete="off">
         {% for f in edit %}
             <div class="control-group">
                 {% set type = fields[f]['widget'] || "text" %}
-                {% set header = fields[f]['header'] %}
+                {% set header = fields[f]['header'] || f %}
                 {% set name = fields[f]['name'] || f %}
                 {% set multiple = fields[f]['multiple'] %}
+                {% set readonly = fields[f]['readonly'] || false %}
                 <label for="{{ f }}" class="control-label">
                     {{ header }}:
                 </label>
                 <div class="controls">
                     {{ mapData(doc, f, '.') }}
-                    {% if type == "select" %}
+                    {% if readonly %}
+                        {% if doc[f] %}
+                            {% if fields[f].display && doc[f] %}
+                                {{ doc[f][fields[f].display] }}
+                            {% else %}
+                              {{ doc[f] ? doc[f] : '' }}
+                            {% endif %}
+                        {% endif %}
+                    {% elseif type == "select" %}
+                        {% set sel = getSelectedValue(doc, f, fields) %}
+
                         <select name="{{ mapName(f, '.') }}" id="{{ mapName(f, '.') }}" {% if multiple %}multiple{% endif %}>
                             {% set values = fields[f]['values'] %}
                             {% for v in values %}
-                                {% set sel = doc[f] %}
-                                {% if fields[f]['ref'] %}
+                                {% if isType(v, 'object') %}
+
                                 <option value="{{ v.value }}" {% if exists(v.value, sel) %}selected{% endif %}>{{ v.display }}</option>
                                 {% else %}
                                 <option value="{{ v }}" {% if v == sel %}selected{% endif %}>{{ v }}</option>
@@ -55,8 +66,8 @@
             </div>
         {% endfor %}
         <div class="form-actions">
-            <button class="btn" type="button" onclick="history.back();">Atras</button>
-            <button class="btn btn-primary" type="submit">Enviar</button>
+            <button class="btn" type="button" onclick="history.back();">Cancel</button>
+            <button class="btn btn-primary" type="submit">Save</button>
         </div>
     </form>
 </div>

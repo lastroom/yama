@@ -1,9 +1,16 @@
 {% extends "layouts/default.html" %}
 
+
+{% block filters %}
+  {% if filters && filters.length > 0 %}
+    {% include "includes/filters.html" %}
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 <div id="list">
     <div id="list-top">
-        <h2>{{ title }}</h2>
+        <h1>{{ title }}</h1>
         <div id="new">
           <a href="{{ base }}/{{ path }}/new" class="btn btn-primary" role="button">+ New</a>
         </div>
@@ -14,7 +21,7 @@
           <tr>
             <th></th>
             {% for f in list %}
-            <th>{{ f }}</th>
+              <th class="sort" data-sort="{{ f }}">{{ fields[f].header }}</th>
             {% endfor %}
             <th></th>
           </tr>
@@ -28,12 +35,18 @@
               <td><a href="{{ base }}/{{ path }}/{{ d.id }}">{{ index }}</a></td>
               {% for f in list %}
               <td>
-                <a href="{{ base }}/{{ path }}/{{ d.id }}">{{ d[f] || "" }}</a>
+                <a href="{{ base }}/{{ path }}/{{ d.id }}">
+                  {% if fields[f] && fields[f]['display'] && d[f] && !fields[f]['to_string'] %}
+                    {{ d[f][fields[f]['display']] }}
+                  {% else %} 
+                    {{ d[f] || "" |raw }}
+                  {% endif %}
+                </a>
               </td>
               {% endfor %}
               <td>
                     <a href="{{ base }}/{{ path }}/{{ d.id }}/edit" class="btn btn-edit">Edit</a>
-                    <a href="{{ base }}/{{ path }}/{{ d.id }}/delete" class="btn btn-danger" onclick="preventDelete">Delete</a>
+                    <a href="{{ base }}/{{ path }}/{{ d.id }}/delete" class="btn btn-danger bt-delete" onclick="preventDelete">Delete</a>
               </td>
             </tr>
           {% endfor %}
@@ -57,6 +70,9 @@
             <td width="25%"><span>Next &gt;&gt;</span></td>
             <td width="25%"><span>Last</span></td>
             {% endif %}
+        </tr>
+        <tr>
+            <td colspan="4">Page {{ page }} / {{ pages }}, {{ count }} results.</td>
         </tr>
     </table>
 </div>
