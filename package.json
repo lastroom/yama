@@ -1,7 +1,7 @@
 {
     "name": "yama",
-    "version": "1.0.7",
-    "_id": "yama@1.0.7",
+    "version": "1.1.0",
+    "_id": "yama@1.1.0",
     "description": "Awesome node-mongoose dashboard, with love from LastRoom at México to you.",
     "homepage": "",
     "company": "LastRoom",
@@ -11,7 +11,11 @@
         "email": "julian@lastroom.mx",
         "url": "https://github.com/julianceballos"
     },
-    "contributors": [],
+    "contributors": [{
+        "name": "Etienne",
+        "website": "http://lapetitepausetechnique.net",
+        "url": "https://github.com/cutesquirrel"
+    }],
     "dependencies": {
         "underscore": "latest",
         "mongoose": "latest",
