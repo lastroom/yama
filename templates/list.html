@@ -38,7 +38,8 @@
                 <a href="{{ base }}/{{ path }}/{{ d.id }}">
                   {% if fields[f] && fields[f]['display'] && d[f] && !fields[f]['to_string'] %}
                     {{ d[f][fields[f]['display']] }}
-                  {% else %} 
+                  {% else %}
+                    {{ mapData(d, f, '.') }}
                     {{ d[f] || "" |raw }}
                   {% endif %}
                 </a>
